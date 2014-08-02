@@ -2,13 +2,17 @@ package filesorter.comparator;
 
 import filesorter.FileNameComparatorFactory;
 import filesorter.SortEntryKeyGenerator;
+import net.ricecode.similarity.JaroWinklerStrategy;
+import net.ricecode.similarity.SimilarityStrategy;
+import net.ricecode.similarity.StringSimilarityService;
+import net.ricecode.similarity.StringSimilarityServiceImpl;
 
 import java.util.Comparator;
 
 /**
  * Simple implementation which uses {@link String#compareTo(String)} as comparator which gives natural string order.
  */
-public class SimpleStringComparatorFactory implements FileNameComparatorFactory {
+public class SimilarityComparatorFactory implements FileNameComparatorFactory {
 
     public static FileNameComparatorFactory getInstance() {
         return instance;
@@ -21,12 +25,17 @@ public class SimpleStringComparatorFactory implements FileNameComparatorFactory 
             public int compare(T o1, T o2) {
                 String k1 = sortKeyGenerator.getSortKey(o1);
                 String k2 = sortKeyGenerator.getSortKey(o2);
-                return k1.compareTo(k2);
+
+                SimilarityStrategy strategy = new JaroWinklerStrategy();
+                StringSimilarityService service = new StringSimilarityServiceImpl(strategy);
+                double score = service.score(k1, k2);
+
+                return (int) ((1-score) * 1E5);
             }
         };
     }
 
-    private SimpleStringComparatorFactory() {}
+    private SimilarityComparatorFactory() {}
 
-    private static FileNameComparatorFactory instance = new SimpleStringComparatorFactory();
+    private static FileNameComparatorFactory instance = new SimilarityComparatorFactory();
 }

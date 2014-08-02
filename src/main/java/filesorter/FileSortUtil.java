@@ -1,19 +1,45 @@
 package filesorter;
 
+import filesorter.algorithm.DefaultSortAlgorithm;
+
 import java.io.File;
-import java.util.Collections;
 import java.util.List;
 
 /**
- *
+ * Entry class for sorting generation. Makes possible to tune logic and has some methods for quick sorting of file and string lists.
  */
 public class FileSortUtil {
 
-    private FileSortUtil() {}
+    public static final SortEntryKeyGenerator<File> FILE_SORT_KEY_GENERATOR = new SortEntryKeyGenerator<File>() {
+        @Override
+        public String getSortKey(File file) {
+            return file.getName();
+        }
+    };
 
-    public static <T> void sort(List<T> list, FileNameComparatorFactory factory, SortKeyGenerator<T> keyGenerator) {
-        Collections.sort(list, factory.getComparator(keyGenerator));
+    public static final SortEntryKeyGenerator<String> STRING_SORT_KEY_GENERATOR = new SortEntryKeyGenerator<String>() {
+        @Override
+        public String getSortKey(String entry) {
+            return entry;
+        }
+    };
+
+    public static <T> void sort(List<T> list, SortingAlgorithm strategy, FileNameComparatorFactory comparatorFactory, SortEntryKeyGenerator<T> keyGenerator) {
+        strategy.sort(list, comparatorFactory.getComparator(keyGenerator));
     }
+
+    /**
+     * Sorts list with {@link filesorter.algorithm.DefaultSortAlgorithm}
+     * @param list
+     * @param factory
+     * @param keyGenerator
+     * @param <T>
+     */
+    public static <T> void sort(List<T> list, FileNameComparatorFactory factory, SortEntryKeyGenerator<T> keyGenerator) {
+        sort(list, DefaultSortAlgorithm.getInstance(), factory, keyGenerator);
+    }
+
+    // Quick access routines for files and string sorting
 
     public static void sortFiles(List<File> files, FileNameComparatorFactory comparator) {
         sort(files, comparator, FILE_SORT_KEY_GENERATOR);
@@ -23,17 +49,5 @@ public class FileSortUtil {
         sort(strings, comparator, STRING_SORT_KEY_GENERATOR);
     }
 
-    private static final SortKeyGenerator<File> FILE_SORT_KEY_GENERATOR = new SortKeyGenerator<File>() {
-        @Override
-        public String getSortKey(File file) {
-            return file.getName();
-        }
-    };
-
-    private static final SortKeyGenerator<String> STRING_SORT_KEY_GENERATOR = new SortKeyGenerator<String>() {
-        @Override
-        public String getSortKey(String entry) {
-            return entry;
-        }
-    };
+    private FileSortUtil() {}
 }

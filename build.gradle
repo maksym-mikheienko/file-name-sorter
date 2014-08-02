@@ -8,6 +8,11 @@ repositories {
 }
 
 dependencies {
+    compile     'org.psjava:psjava:0.1.15',
+                'commons-lang:commons-lang:2.4'
+    compile     fileTree(dir: 'lib', include: ['*.jar'])
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile 'commons-io:commons-io:2.4'
+    testCompile 'commons-io:commons-io:2.4',
+                'commons-lang:commons-lang:2.4'
 }
