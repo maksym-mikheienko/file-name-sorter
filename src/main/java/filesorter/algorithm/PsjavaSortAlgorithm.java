@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Uses java collections default sorting algorithm.
+ * Base utility class for algorithms implementation for ps-java
  */
 public abstract class PsjavaSortAlgorithm implements SortingAlgorithm {
 

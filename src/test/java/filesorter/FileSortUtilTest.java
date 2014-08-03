@@ -1,7 +1,6 @@
 package filesorter;
 
 import filesorter.comparator.SimpleStringComparatorFactory;
-import filesorter.comparator.WordsAndNumbersComparatorFactory;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 

@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Uses java collections default sorting algorithm.
+ * Uses {@link org.psjava.algo.sequence.sort.MergeSort} sorting algorithm.
  */
 public class MergeSortAlgorithm extends PsjavaSortAlgorithm {
 

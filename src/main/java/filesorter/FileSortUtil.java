@@ -24,8 +24,8 @@ public class FileSortUtil {
         }
     };
 
-    public static <T> void sort(List<T> list, SortingAlgorithm strategy, FileNameComparatorFactory comparatorFactory, SortEntryKeyGenerator<T> keyGenerator) {
-        strategy.sort(list, comparatorFactory.getComparator(keyGenerator));
+    public static <T> void sort(List<T> list, SortingAlgorithm algorithm, FileNameComparatorFactory comparatorFactory, SortEntryKeyGenerator<T> keyGenerator) {
+        algorithm.sort(list, comparatorFactory.getComparator(keyGenerator));
     }
 
     /**
@@ -41,12 +41,12 @@ public class FileSortUtil {
 
     // Quick access routines for files and string sorting
 
-    public static void sortFiles(List<File> files, FileNameComparatorFactory comparator) {
-        sort(files, comparator, FILE_SORT_KEY_GENERATOR);
+    public static void sortFiles(List<File> files, FileNameComparatorFactory factory) {
+        sort(files, factory, FILE_SORT_KEY_GENERATOR);
     }
 
-    public static void sortStrings(List<String> strings, FileNameComparatorFactory comparator) {
-        sort(strings, comparator, STRING_SORT_KEY_GENERATOR);
+    public static void sortStrings(List<String> strings, FileNameComparatorFactory factory) {
+        sort(strings, factory, STRING_SORT_KEY_GENERATOR);
     }
 
     private FileSortUtil() {}

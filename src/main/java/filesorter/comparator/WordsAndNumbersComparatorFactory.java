@@ -8,7 +8,8 @@ import org.apache.commons.lang.math.NumberUtils;
 import java.util.Comparator;
 
 /**
- * Simple implementation which uses {@link String#compareTo(String)} as comparator which gives natural string order.
+ * Comparator implementation from test task. Separately processes text and number parts. Text parts are grouped ignoring case
+ * while inside group case counts.
  */
 public class WordsAndNumbersComparatorFactory implements FileNameComparatorFactory {
 

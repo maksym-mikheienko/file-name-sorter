@@ -10,7 +10,7 @@ import net.ricecode.similarity.StringSimilarityServiceImpl;
 import java.util.Comparator;
 
 /**
- * Simple implementation which uses {@link String#compareTo(String)} as comparator which gives natural string order.
+ * Experimental implementation using similarity check https://github.com/rrice/java-string-similarity.
  */
 public class SimilarityComparatorFactory implements FileNameComparatorFactory {
 

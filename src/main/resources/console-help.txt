@@ -1,21 +1,7 @@
-Library sorts generic lists and writes output to console or into file.
-List could be mixed object types. Out of the box ```List<String>``` and ```List<File>``` support provided.
 
-Library is memory-thrifty and doesn't generate duplicate collections. Source list gets sorted thus has to be mutual,
-no proxies created for elements.
-
-Advanced configuration permits customizing all three levels:
-* entries access
-* comparison strategy
-* sorting algorithm
-
-To run tests use
-```./gradlew test``` or ```./gradlew test -i``` to add some verbosity and check sample output and time metrics
-
-To get help use
-```./gradlew run```
-this will show the following info
-```
+------------------------
+File Name Sorter
+------------------------
 Usage:
     ./gradlew run -Pargs="<space separated options>"
 
@@ -35,4 +21,3 @@ Usage:
     Example usage:
         ./gradlew run -Pargs="-d -a RandomizedQuicksortSortAlgorithm -c SimilarityComparator"
         ./gradlew run -Pargs="-i input.txt -o output.txt"
-```
